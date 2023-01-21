@@ -1,0 +1,8 @@
+D:\PET\TextToSpeach\TTSWithoutNeron\bin\Release\TTSWithoutNeron.exe.config
+D:\PET\TextToSpeach\TTSWithoutNeron\bin\Release\TTSWithoutNeron.exe
+D:\PET\TextToSpeach\TTSWithoutNeron\bin\Release\TTSWithoutNeron.pdb
+D:\PET\TextToSpeach\TTSWithoutNeron\obj\Release\TTSWithoutNeron.csproj.AssemblyReference.cache
+D:\PET\TextToSpeach\TTSWithoutNeron\obj\Release\TTSWithoutNeron.csproj.SuggestedBindingRedirects.cache
+D:\PET\TextToSpeach\TTSWithoutNeron\obj\Release\TTSWithoutNeron.csproj.CoreCompileInputs.cache
+D:\PET\TextToSpeach\TTSWithoutNeron\obj\Release\TTSWithoutNeron.exe
+D:\PET\TextToSpeach\TTSWithoutNeron\obj\Release\TTSWithoutNeron.pdb

@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MainTTSLangCommands.cs" />
     <Compile Include="MainTTSMethods.cs" />
     <Compile Include="TextToPhonem.cs" />
     <Compile Include="Program.cs" />

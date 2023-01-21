@@ -1,4 +1,4 @@
--name:en,//lang name
+-name,en,//lang name
 //(text/text)>sound text(text/text)>sound text(arg)>sounds
 //$ = absolute; > to; char>char = sound+char
 
