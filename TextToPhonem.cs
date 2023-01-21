@@ -19,6 +19,7 @@ namespace TTSWithoutNeron.lang
 
             DateTime startTime = DateTime.Now;
 
+            //clear data
             int i = 0;
             while (DateTime.Now.TimeOfDay.TotalSeconds - startTime.TimeOfDay.TotalSeconds < 60)
             {
@@ -46,6 +47,27 @@ namespace TTSWithoutNeron.lang
                 }
 
                 i++;
+            }
+
+
+            for (i = 0; i < langFileText.Count; i++)
+            {
+                for (int j = 0; j < langFileText[i].Count; j++)
+                {
+                    if (langFileText[i][j][0].Equals('-'))
+                    {
+                        foreach (var name in MainTTSLangCommands.AllNames)
+                        {
+                            if (langFileText[i][j].Equals(name))
+                            {
+                                MainTTSMethods useComand
+                            }
+
+
+                            Debug.WriteLine(name);
+                        }
+                    }
+                }
             }
         }
 
