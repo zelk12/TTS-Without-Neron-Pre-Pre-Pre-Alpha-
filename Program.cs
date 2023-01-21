@@ -9,9 +9,10 @@ namespace TTSWithoutNeron
 {
     internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            TextToPhonem;
+            TextToPhonem mainTextToPhonem = new TextToPhonem("D:\\PET\\TextToSpeach\\TTSWithoutNeron\\lang\\en.csv");
+            mainTextToPhonem.Translate("Hello world!");
         }
     }
 }
