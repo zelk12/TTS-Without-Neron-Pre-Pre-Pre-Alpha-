@@ -1,0 +1,40 @@
+-name:en,//lang name
+//(text/text)>sound text(text/text)>sound text(arg)>sounds
+//$ = absolute; > to; char>char = sound+char
+
+-sound
+//glas
+u>(+sogl),o>(m/n/v/th),>,ʌ,//\/
+a>(+sogl),>,æ,//\/
+ar,a>(f/nt/th),as(+sogl),>,a:,//\/
+i>(ld/nd/gh),>,ai,//!
+ou,ow,>,aʊ,//\/
+
+//sogl
+p,>,p,//\/
+b,>,b,//\/
+k,>,k,//\/
+g,>,g,//\/
+f,ph,>,f,//\/
+v,>,v,//\/
+m,>,m,//\/
+n,>,n,//\/
+l,>,l,//\/
+t,>,t,//\/
+d,>,d,//\/
+s,ss,c>(e/i/y),>,s,//\/
+z,>,z,//\/
+
+n(k/g),>,ŋ,//!
+r,>,r,//\/
+y>(+glas),>,j,//\/
+
+
+h,>,h,//\/
+
+w,>,w,//\/
+
+-arg
++sogl,=,b,c,d,f,g,h,j,k,l,m,n,p,q,r,s,t,v,w,x,y,z
++glas,=,a,e,i,o,u,y
+-glossary

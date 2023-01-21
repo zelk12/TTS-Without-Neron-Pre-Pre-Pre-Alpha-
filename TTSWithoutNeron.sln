@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTSWithoutNeron", "TTSWithoutNeron.csproj", "{C23D9EB0-4F8E-4EA5-AB80-EB768DC397DA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C23D9EB0-4F8E-4EA5-AB80-EB768DC397DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C23D9EB0-4F8E-4EA5-AB80-EB768DC397DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C23D9EB0-4F8E-4EA5-AB80-EB768DC397DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C23D9EB0-4F8E-4EA5-AB80-EB768DC397DA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BEA5F408-E7CC-4589-B878-17E2661A08FE}
+	EndGlobalSection
+EndGlobal
