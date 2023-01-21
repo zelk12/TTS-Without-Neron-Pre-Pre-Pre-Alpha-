@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TTSWithoutNeron.lang;
 
 namespace TTSWithoutNeron
 {
@@ -10,8 +11,7 @@ namespace TTSWithoutNeron
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello world");
-            Console.ReadKey();
+            TextToPhonem;
         }
     }
 }
