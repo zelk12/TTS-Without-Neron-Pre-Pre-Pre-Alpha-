@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using TTSWithoutNeron;
 
 namespace TTSWithoutNeron.lang
 {
     internal class TextToPhonem
     {
-        private string langFileName = "Unnamed";
-        private StreamReader langFile;
-        private List<List<string>> langFileText = new List<List<string>>();
+        private string _langFileName = "Unnamed";
+        private StreamReader _langFile;
+        private List<List<string>> _langFileText = new List<List<string>>();
 
         #region main file
+
         public TextToPhonem(string filePath)
         {
-            langFile = MainTTSMethods.GetLangFile(filePath);
+            _langFile = MainTTSMethods.GetLangFile(filePath);
             Debug.WriteLine("file connected");
 
             DateTime startTime = DateTime.Now;
@@ -27,23 +27,23 @@ namespace TTSWithoutNeron.lang
             {
                 try
                 {
-                    langFileText.Add(langFile.ReadLine().Split(',').ToList<string>());
+                    _langFileText.Add(_langFile.ReadLine().Split(',').ToList<string>());
                 }
-                catch (Exception)
+                catch
                 {
                     break;
                 }
 
-                for (int j = 0; j < langFileText[i].Count; j++)
+                for (int j = 0; j < _langFileText[i].Count; j++)
                 {
-                    if (langFileText[i][j].Contains("//") || langFileText[i][j].Equals(""))
+                    if (_langFileText[i][j].Contains("//") || _langFileText[i][j].Equals(""))
                     {
-                        langFileText[i].RemoveAt(j);
+                        _langFileText[i].RemoveAt(j);
                     }
 
-                    if (langFileText[i].Count == 0)
+                    if (_langFileText[i].Count == 0)
                     {
-                        langFileText.RemoveAt(i);
+                        _langFileText.RemoveAt(i);
                         i--;
                     }
                 }
@@ -52,27 +52,18 @@ namespace TTSWithoutNeron.lang
             }
 
             //Comamnd check
-            for (i = 0; i < langFileText.Count; i++)
+            for (i = 0; i < _langFileText.Count; i++)
             {
-                for (int j = 0; j < langFileText[i].Count; j++)
+                for (int j = 0; j < _langFileText[i].Count; j++)
                 {
-                    if (langFileText[i][j][0].Equals('-'))
+                    if (_langFileText[i][j][0].Equals('-'))
                     {
-                        foreach (var name in MainTTSLangCommands.AllNames)
-                        {
-                            if (langFileText[i][j].Equals(name))
-                            {
-                                if (MainTTSLangCommands.CommandsName.Name.Equals(langFileText[i][j]) && langFileText[i].Count > 1)
-                                {
-                                    langFileName = langFileText[i][j + 1];
-                                }
-                            }
-                            Debug.WriteLine(name);
-                        }
+                        _langFileName = MainTTSLangCommands.CheckCommand(_langFileText[i][j], _langFileText[i]).ToString();
                     }
                 }
             }
         }
+
         #endregion main file
 
         private string langName = "en.csv";
