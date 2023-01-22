@@ -9,9 +9,11 @@ namespace TTSWithoutNeron.lang
 {
     internal class TextToPhonem
     {
+        private string langFileName = "Unnamed";
         private StreamReader langFile;
         private List<List<string>> langFileText = new List<List<string>>();
 
+        #region main file
         public TextToPhonem(string filePath)
         {
             langFile = MainTTSMethods.GetLangFile(filePath);
@@ -49,7 +51,7 @@ namespace TTSWithoutNeron.lang
                 i++;
             }
 
-
+            //Comamnd check
             for (i = 0; i < langFileText.Count; i++)
             {
                 for (int j = 0; j < langFileText[i].Count; j++)
@@ -60,16 +62,18 @@ namespace TTSWithoutNeron.lang
                         {
                             if (langFileText[i][j].Equals(name))
                             {
-                                MainTTSMethods useComand
+                                if (MainTTSLangCommands.CommandsName.Name.Equals(langFileText[i][j]) && langFileText[i].Count > 1)
+                                {
+                                    langFileName = langFileText[i][j + 1];
+                                }
                             }
-
-
                             Debug.WriteLine(name);
                         }
                     }
                 }
             }
         }
+        #endregion main file
 
         private string langName = "en.csv";
         private static string pathToLang = "/lang";
