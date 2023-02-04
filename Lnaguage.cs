@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace TTSWithoutNeron
 {
-    internal class MainTTSMethods
+    internal class Lnaguage
     {
-        public static StreamReader GetLangFile(string pathToFile)
+        public class ForWork
         {
-            return new StreamReader(pathToFile);
+            private void Load(string path = "")
+            {
+            }
         }
     }
 }

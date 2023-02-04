@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TTSWithoutNeron.LangArgument" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAFAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>LangArgument.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TTSWithoutNeron.LangFile" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAkAAAAIAAAAgAAAAA=</HashCode>
+      <FileName>LangFile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TTSWithoutNeron.Program" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TTSWithoutNeron.LangCharacters" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>LangCharacters.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TTSWithoutNeron.WordToTranscript" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAABBAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WordToTranscript.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TTSWithoutNeron.CharactersToSound" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CharacterToSound.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TTSWithoutNeron.SoundSummaryList" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <NestedTypes>
+      <Class Name="TTSWithoutNeron.SoundSummaryList.OutputSoundList" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>SoundSummaryList.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="TTSWithoutNeron.SoundSummaryList.InputSounds" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>SoundSummaryList.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SoundSummaryList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
