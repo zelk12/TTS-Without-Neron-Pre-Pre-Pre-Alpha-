@@ -46,14 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CharacterToSound.cs" />
-    <Compile Include="LangArgument.cs" />
-    <Compile Include="LangCharacters.cs" />
-    <Compile Include="LangFile.cs" />
+    <Compile Include="Commands.cs" />
+    <Compile Include="Lnaguage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SoundSummaryList.cs" />
-    <Compile Include="WordToTranscript.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -62,9 +58,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\DataSources\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Class suggestion.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

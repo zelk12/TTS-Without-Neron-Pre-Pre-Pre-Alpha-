@@ -11,6 +11,8 @@ namespace TTSWithoutNeron
     {
         private static void Main(string[] args)
         {
+            Lnaguage.ForWork en = new Lnaguage.ForWork();
+            en.Load("D:\\PET\\TextToSpeach\\TTSWithoutNeron\\lang\\en.csv");
         }
     }
 }
