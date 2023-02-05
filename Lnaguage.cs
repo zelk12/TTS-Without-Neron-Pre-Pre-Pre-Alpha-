@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -10,43 +11,12 @@ using System.Threading.Tasks;
 
 namespace TTSWithoutNeron
 {
-    internal class Lnaguage
+    internal partial class Lnaguage
     {
-        public class ForWork
+        public partial class ForWork
         {
-            public static class Name
-            {
-                private static string value;
-
-                public static string get()
-                {
-                    return value != null ? value : "N/A";
-                }
-
-                public static void set(string newValue)
-                {
-                    value = newValue;
-                }
-
-                public static void Find(string[] _langTextLines)
-                {
-                    foreach (string line in _langTextLines)
-                    {
-                        string[] _splitedLine = line.Split(',');
-
-                        IEnumerator _lines = _splitedLine.GetEnumerator();
-                        while (_lines.MoveNext() && _lines.Current != null)
-                        {
-                            string _lineText = _lines.Current.ToString().Trim();
-
-                            if (_lineText == Commands.get["Name"] && _lines.MoveNext())
-                            {
-                                value = _lines.Current.ToString().Trim();
-                            }
-                        }
-                    }
-                }
-            }
+            private StandartClass.Name _name = new StandartClass.Name();
+            private StandartClass.Dictionarys _dictionary = new StandartClass.Dictionarys();
 
             public void Load(string path = "")
             {
@@ -55,20 +25,13 @@ namespace TTSWithoutNeron
                 string _langText = _langFile.ReadToEnd();
                 string[] _langTextLines = textToTextLines(_langText);
 
-                Name.Find(_langTextLines);
-                @Dictionary.Create(_langTextLines);
-            }
-
-            public static class @Dictionary
-            {
-                public static void Create(string[] _langTextLines)
-                {
-                }
+                _name.Find(_langTextLines);
+                _dictionary.Create(_langTextLines);
             }
 
             private static string[] textToTextLines(string input)
             {
-                string pattern = @"\r\n+";
+                string pattern = @"(\r\n)+";
                 string substitution = "\n";
 
                 Regex regex = new Regex(pattern);
@@ -84,6 +47,94 @@ namespace TTSWithoutNeron
                 string[] _langTextSplited = result.Split(new char[] { '\n' });
 
                 return _langTextSplited;
+            }
+
+            private class StandartClass
+            {
+                public class Name
+                {
+                    private static string _value = "N/A";
+
+                    public string get()
+                    {
+                        return _value != null ? _value : "N/A";
+                    }
+
+                    public void set(string newValue)
+                    {
+                        _value = newValue;
+                    }
+
+                    public void Find(string[] _langTextLines)
+                    {
+                        foreach (string line in _langTextLines)
+                        {
+                            string[] _splitedLine = line.Split(',');
+
+                            IEnumerator _lines = _splitedLine.GetEnumerator();
+                            while (_lines.MoveNext() && _lines.Current != null)
+                            {
+                                string _lineText = _lines.Current.ToString().Trim();
+
+                                if (_lineText == Commands.get[Commands.Names.Name] && _lines.MoveNext())
+                                {
+                                    _value = _lines.Current.ToString().Trim();
+                                }
+                            }
+                        }
+                    }
+                }
+
+                public class Dictionarys
+                {
+                    private Dictionary<string, string> _charsAndSound;
+                    private Dictionary<string, string> _soundAndSound;
+
+                    private Dictionary<string, string> _variable;
+                    private Dictionary<string, string> _wordAndTranscription;
+
+                    public void Create(string[] _langTextLines)
+                    {
+                        int state = -1;
+                        Dictionary<string, int> _switchStates = new Dictionary<string, int>{
+                            { Commands.get[Commands.Names.CharsToSound], 0},
+                            { Commands.get[Commands.Names.SoundToSound], 1},
+                            { Commands.get[Commands.Names.Variable], 2},
+                            { Commands.get[Commands.Names.Glossary], 3},
+                        };
+
+                        foreach (string _lines in _langTextLines)
+                        {
+                            if (_lines.Contains('-'))
+                            {
+                                if (!_switchStates.TryGetValue(_lines, out state))
+                                {
+                                    state = -1;
+                                }
+                            }
+                            else
+                            {
+                                switch (state)
+                                {
+                                    case 0:
+                                        break;
+
+                                    case 1:
+                                        break;
+
+                                    case 2:
+                                        break;
+
+                                    case 3:
+                                        break;
+
+                                    default:
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }

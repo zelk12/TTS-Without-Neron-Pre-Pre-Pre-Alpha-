@@ -8,12 +8,29 @@ namespace TTSWithoutNeron
 {
     internal static class Commands
     {
+        public static string testm()
+        {
+            return "a";
+        }
+
         public static Dictionary<string, string> get = new Dictionary<string, string>()
         {
             { "Name", "-name" },
-            { "WordToSound", "-wordToSound" },
-            { "variable", "-variable" },
+
+            { "CharsToSound", "-charsToSound" },
+
+            { "SoundToSound", "-soundToSound" },
+            { "Variable", "-variable" },
             { "Glossary", "-glossary" },
         };
+
+        public static class Names
+        {
+            public const string Name = "Name";
+            public const string CharsToSound = "CharsToSound";
+            public const string SoundToSound = "SoundToSound";
+            public const string Variable = "Variable";
+            public const string Glossary = "Glossary";
+        }
     }
 }
