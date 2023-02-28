@@ -87,11 +87,11 @@ namespace TTSWithoutNeron
 
                 public class Dictionarys
                 {
-                    private Dictionary<string, string> _charsAndSound;
-                    private Dictionary<string, string> _soundAndSound;
+                    private Dictionary<string, string> _charsAndSound = new Dictionary<string, string>();
+                    private Dictionary<string, string> _soundAndSound = new Dictionary<string, string>();
 
-                    private Dictionary<string, string> _variable;
-                    private Dictionary<string, string> _wordAndTranscription;
+                    private Dictionary<string, string> _variable = new Dictionary<string, string>();
+                    private Dictionary<string, string> _wordAndTranscription = new Dictionary<string, string>();
 
                     public void Create(string[] _langTextLines)
                     {
@@ -103,11 +103,12 @@ namespace TTSWithoutNeron
                             { Commands.get[Commands.Names.Glossary], 3},
                         };
 
-                        foreach (string _lines in _langTextLines)
+                        for (int _lineNumber = 0; _lineNumber < _langTextLines.Length; _lineNumber++)
                         {
-                            if (_lines.Contains('-'))
+                            string _line = _langTextLines[_lineNumber];
+                            if (_line.Contains('-'))
                             {
-                                if (!_switchStates.TryGetValue(_lines, out state))
+                                if (!_switchStates.TryGetValue(_line, out state))
                                 {
                                     state = -1;
                                 }
@@ -117,12 +118,32 @@ namespace TTSWithoutNeron
                                 switch (state)
                                 {
                                     case 0:
+                                        RegexOptions options = RegexOptions.IgnoreCase;
+
+                                        string _tempLine = Regex.Replace(@_line, @"(,(?=>)|(?<=>),|,$)", "", options);
+                                        string[] _tempGlossary = @_tempLine.Split('>');
+                                        string _tempNewCharData = _tempGlossary[0].Replace(',', '|');
+
+                                        _charsAndSound.Add(_tempNewCharData, _tempGlossary[1]);
                                         break;
 
                                     case 1:
+                                        options = RegexOptions.IgnoreCase;
+
+                                        _tempLine = Regex.Replace(@_line, @"(,(?=>)|(?<=>),|,$)", "", options);
+                                        _tempGlossary = @_tempLine.Split('>');
+                                        string _tempNewSoundData = _tempGlossary[0].Replace(',', '|');
+
+                                        _soundAndSound.Add(_tempNewSoundData, _tempGlossary[1]);
                                         break;
 
                                     case 2:
+                                        options = RegexOptions.IgnoreCase;
+
+                                        string _tempName = Regex.Match(@_line, @"(?<=').*(?=')", options).Value;
+                                        string _tempData = Regex.Match(@_line, @"(?<='.*').*(?!')(?=\))", options).Value;
+
+                                        _variable.Add(_tempName, _tempData);
                                         break;
 
                                     case 3:

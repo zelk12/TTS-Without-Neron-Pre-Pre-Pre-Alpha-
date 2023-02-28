@@ -8,11 +8,6 @@ namespace TTSWithoutNeron
 {
     internal static class Commands
     {
-        public static string testm()
-        {
-            return "a";
-        }
-
         public static Dictionary<string, string> get = new Dictionary<string, string>()
         {
             { "Name", "-name" },
