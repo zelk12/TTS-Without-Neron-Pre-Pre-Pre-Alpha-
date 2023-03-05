@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -147,9 +148,16 @@ namespace TTSWithoutNeron
                                         break;
 
                                     case 3:
+                                        options = RegexOptions.IgnoreCase;
+
+                                        string _tempText = Regex.Replace(@_line, @"(,(?=>)|(?<=>),|,$)", "", options);
+                                        _tempGlossary = @_tempText.Split('>');
+
+                                        _wordAndTranscription.Add(_tempGlossary[0], _tempGlossary[1]);
                                         break;
 
                                     default:
+                                        Debug.WriteLine("State " + state.ToString() + " not found.");
                                         break;
                                 }
                             }
