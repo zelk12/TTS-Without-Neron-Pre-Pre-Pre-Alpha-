@@ -13,8 +13,6 @@ namespace TTSWithoutNeron
         {
             Transcriptor.LanguageDictionary languageTrancriptInstruction = new Transcriptor.LanguageDictionary();
             languageTrancriptInstruction.Load("D:\\PET\\TextToSpeach\\TTSWithoutNeron\\lang\\en.csv");
-
-            languageTrancriptInstruction.Name;
         }
     }
 }
