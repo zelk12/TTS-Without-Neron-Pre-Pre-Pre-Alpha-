@@ -12,15 +12,23 @@ using System.Threading.Tasks;
 
 namespace TTSWithoutNeron
 {
-    internal partial class Lnaguage
+    /// <summary>
+    /// Класс транскриптора.
+    /// </summary>
+    internal partial class Transcriptor
     {
         /// <summary>
-        /// Основной класс языков.
+        /// Словарь транскриптора.
+        /// Содержит имя языка и инструкции о создании транскрипций.
         /// </summary>
-        public partial class ForWork
+        public partial class LanguageDictionary
         {
-            private StandartClass.Name _name = new StandartClass.Name();
-            private StandartClass.Dictionarys _dictionary = new StandartClass.Dictionarys();
+            /// <summary>
+            /// Название языка.
+            /// </summary>
+            public StandartClass.LanguageName Name { get; private set; } = new StandartClass.LanguageName();
+
+            private StandartClass.Dictionarys dictionary = new StandartClass.Dictionarys();
 
             /// <summary>
             /// Метод первоначального запуска языка,
@@ -28,61 +36,61 @@ namespace TTSWithoutNeron
             /// -Создает массив с делением этого файла по строкам
             /// -Создает словари языка, которые используются при работе
             /// </summary>
-            /// <param name="path">Путь к директории где храниться файл языка.</param>
-            public void Load(string path = "")
+            /// <param name="_path">Путь к директории где храниться файл языка.</param>
+            public void Load(string _path = "")
             {
-                StreamReader _langFile = new StreamReader(path);
+                StreamReader langFile = new StreamReader(_path);
 
-                string _langText = _langFile.ReadToEnd();
-                string[] _langTextLines = textToTextLines(_langText);
+                string langText = langFile.ReadToEnd();
+                string[] langTextLines = textToTextLines(langText);
 
-                _name.Find(_langTextLines);
-                _dictionary.Create(_langTextLines);
+                Name.Find(langTextLines);
+                dictionary.Create(langTextLines);
             }
 
             /// <summary>
             /// Из единого текстового файла с переносами,
             /// создает массив с делением на отдельные строк.
             /// </summary>
-            /// <param name="input">Текстовый файл где есть переносы по строкам.</param>
+            /// <param name="_input">Текстовый файл где есть переносы по строкам.</param>
             /// <returns>Массив строк из файла.</returns>
-            private static string[] textToTextLines(string input)
+            private static string[] textToTextLines(string _input)
             {
                 string pattern = @"(\r\n)+";
                 string substitution = "\n";
 
                 Regex regex = new Regex(pattern);
-                string result = regex.Replace(input, substitution);
+                string result = regex.Replace(_input, substitution);
 
                 pattern = @"(,|\n)//.*?(?=(\n|,))";
                 substitution = "";
-                input = result;
+                _input = result;
 
                 regex = new Regex(pattern);
-                result = regex.Replace(input, substitution);
+                result = regex.Replace(_input, substitution);
 
                 string[] _langTextSplited = result.Split(new char[] { '\n' });
 
                 return _langTextSplited;
             }
 
-            private class StandartClass
+            public class StandartClass
             {
                 /// <summary>
                 /// Класс обозначающий имя файла
                 /// </summary>
-                public class Name
+                public class LanguageName
                 {
-                    private static string _value = "N/A";
+                    private static string value = null;
 
                     public string get()
                     {
-                        return _value != null ? _value : "N/A";
+                        return value != null ? value : null;
                     }
 
-                    public void set(string newValue)
+                    public void set(string _value)
                     {
-                        _value = newValue;
+                        value = _value;
                     }
 
                     /// <summary>
@@ -95,16 +103,16 @@ namespace TTSWithoutNeron
                         {
                             bool nameFinded = false;
 
-                            string[] _splitedLine = line.Split(',');
+                            string[] splitedLine = line.Split(',');
 
-                            IEnumerator _lines = _splitedLine.GetEnumerator();
-                            while (_lines.MoveNext() && _lines.Current != null)
+                            IEnumerator lines = splitedLine.GetEnumerator();
+                            while (lines.MoveNext() && lines.Current != null)
                             {
-                                string _lineText = _lines.Current.ToString().Trim();
+                                string lineText = lines.Current.ToString().Trim();
 
-                                if (_lineText == Commands.get[Commands.Names.Name] && _lines.MoveNext())
+                                if (lineText == Commands.get[Commands.Names.Name] && lines.MoveNext())
                                 {
-                                    _value = _lines.Current.ToString().Trim();
+                                    value = lines.Current.ToString().Trim();
                                     nameFinded = true;
                                     break;
                                 }
@@ -123,11 +131,11 @@ namespace TTSWithoutNeron
                 /// </summary>
                 public class Dictionarys
                 {
-                    private Dictionary<string, string> _charsAndSound = new Dictionary<string, string>();
-                    private Dictionary<string, string> _soundAndSound = new Dictionary<string, string>();
+                    private Dictionary<string, string> charsAndSound = new Dictionary<string, string>();
+                    private Dictionary<string, string> soundAndSound = new Dictionary<string, string>();
 
-                    private Dictionary<string, string> _variable = new Dictionary<string, string>();
-                    private Dictionary<string, string> _wordAndTranscription = new Dictionary<string, string>();
+                    private Dictionary<string[], string> variable = new Dictionary<string[], string>();
+                    private Dictionary<string, string> wordAndTranscription = new Dictionary<string, string>();
 
                     /// <summary>
                     /// Создает и заполняет словари.
@@ -136,7 +144,7 @@ namespace TTSWithoutNeron
                     public void Create(string[] _langTextLines)
                     {
                         int state = -1;
-                        Dictionary<string, int> _switchStates = new Dictionary<string, int>{
+                        Dictionary<string, int> switchStates = new Dictionary<string, int>{
                             { Commands.get[Commands.Names.CharsToSound], 0},
                             { Commands.get[Commands.Names.SoundToSound], 1},
                             { Commands.get[Commands.Names.Variable], 2},
@@ -148,7 +156,7 @@ namespace TTSWithoutNeron
                             string _line = _langTextLines[_lineNumber];
                             if (_line.Contains('-'))
                             {
-                                if (!_switchStates.TryGetValue(_line, out state))
+                                if (!switchStates.TryGetValue(_line, out state))
                                 {
                                     state = -1;
                                 }
@@ -163,24 +171,30 @@ namespace TTSWithoutNeron
                                     case 0:
                                         RegexOptions options = RegexOptions.IgnoreCase;
 
-                                        string _tempLine = Regex.Replace(@_line, @"(,(?=>)|(?<=>),|,$)", "", options);
-                                        string[] _tempGlossary = @_tempLine.Split('>');
-                                        string _tempNewCharData = _tempGlossary[0].Replace(',', '|');
+                                        string tempLine = Regex.Replace(@_line, @"(,(?=>)|(?<=>),|,$)", "", options);
+                                        string[] tempGlossary = tempLine.Split('>');
+                                        string tempNewCharData = tempGlossary[0].Replace(',', '|');
 
-                                        _charsAndSound.Add(_tempNewCharData, _tempGlossary[1]);
+                                        charsAndSound.Add(tempNewCharData, tempGlossary[1]);
+
+                                        tempLine = null;
+                                        tempGlossary = null;
+                                        tempNewCharData = null;
                                         break;
 
                                     /// <summary>
                                     /// Заполняет словарь сочетанием звуков и создаваемыми ими в сумме звуками.
                                     /// </summary>
                                     case 1:
-                                        options = RegexOptions.IgnoreCase;
+                                        tempLine = Regex.Replace(@_line, @"(,(?=>)|(?<=>),|,$)", "");
+                                        tempGlossary = tempLine.Split('>');
+                                        string tempNewSoundData = tempGlossary[0].Replace(',', '|');
 
-                                        _tempLine = Regex.Replace(@_line, @"(,(?=>)|(?<=>),|,$)", "", options);
-                                        _tempGlossary = @_tempLine.Split('>');
-                                        string _tempNewSoundData = _tempGlossary[0].Replace(',', '|');
+                                        soundAndSound.Add(tempNewSoundData, tempGlossary[1]);
 
-                                        _soundAndSound.Add(_tempNewSoundData, _tempGlossary[1]);
+                                        tempLine = null;
+                                        tempGlossary = null;
+                                        tempNewCharData = null;
                                         break;
 
                                     /// <summary>
@@ -189,10 +203,11 @@ namespace TTSWithoutNeron
                                     case 2:
                                         options = RegexOptions.IgnoreCase;
 
-                                        string _tempName = Regex.Match(@_line, @"(?<=').*(?=')", options).Value;
-                                        string _tempData = Regex.Match(@_line, @"(?<='.*').*(?!')(?=\))", options).Value;
+                                        string tempName = Regex.Match(@_line, "(?<=\\?').*(?=')", options).Value;
+                                        string tempParametrs = Regex.Match(@_line, "(?<=\\(\\?)[gimsnxrN]*(?=\\))").Value;
+                                        string tempData = Regex.Match(@_line, "(?<=\\)).*(?=\\))", options).Value;
 
-                                        _variable.Add(_tempName, _tempData);
+                                        variable.Add(new string[] { tempName, tempParametrs }, tempData);
                                         break;
 
                                     /// <summary>
@@ -201,10 +216,10 @@ namespace TTSWithoutNeron
                                     case 3:
                                         options = RegexOptions.IgnoreCase;
 
-                                        string _tempText = Regex.Replace(@_line, @"(,(?=>)|(?<=>),|,$)", "", options);
-                                        _tempGlossary = @_tempText.Split('>');
+                                        string tempText = Regex.Replace(@_line, @"(,(?=>)|(?<=>),|,$)", "", options);
+                                        tempGlossary = tempText.Split('>');
 
-                                        _wordAndTranscription.Add(_tempGlossary[0], _tempGlossary[1]);
+                                        wordAndTranscription.Add(tempGlossary[0], tempGlossary[1]);
                                         break;
 
                                     /// <summary>
@@ -218,6 +233,16 @@ namespace TTSWithoutNeron
                         }
                     }
                 }
+            }
+
+            /// <summary>
+            /// Создает транскрипцию текста.
+            /// </summary>
+            /// <param name="Text">Текст, транскрипцию которого нужно создать.</param>
+            /// <returns></returns>
+            public string Transcript(string Text)
+            {
+                return "N/A";
             }
         }
     }
