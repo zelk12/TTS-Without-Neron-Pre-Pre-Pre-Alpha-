@@ -110,7 +110,7 @@ namespace TTSWithoutNeron
                             {
                                 string lineText = lines.Current.ToString().Trim();
 
-                                if (lineText == Commands.get[Commands.Names.Name] && lines.MoveNext())
+                                if (lineText == Constants.Commands[Constants.CommandsNames.Name] && lines.MoveNext())
                                 {
                                     value = lines.Current.ToString().Trim();
                                     nameFinded = true;
@@ -145,10 +145,10 @@ namespace TTSWithoutNeron
                     {
                         int state = -1;
                         Dictionary<string, int> switchStates = new Dictionary<string, int>{
-                            { Commands.get[Commands.Names.CharsToSound], 0},
-                            { Commands.get[Commands.Names.SoundToSound], 1},
-                            { Commands.get[Commands.Names.Variable], 2},
-                            { Commands.get[Commands.Names.Glossary], 3},
+                            { Constants.Commands[Constants.CommandsNames.CharsToSound], 0},
+                            { Constants.Commands[Constants.CommandsNames.SoundToSound], 1},
+                            { Constants.Commands[Constants.CommandsNames.Variable], 2},
+                            { Constants.Commands[Constants.CommandsNames.Glossary], 3},
                         };
 
                         for (int _lineNumber = 0; _lineNumber < _langTextLines.Length; _lineNumber++)

@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace TTSWithoutNeron
 {
-    internal static class Commands
+    internal static class Constants
     {
-        public static Dictionary<string, string> get = new Dictionary<string, string>()
+        /// <summary>
+        /// Используемые команды.
+        /// </summary>
+        public static Dictionary<string, string> Commands = new Dictionary<string, string>()
         {
             { "Name", "-name" },
 
@@ -19,7 +22,10 @@ namespace TTSWithoutNeron
             { "Glossary", "-glossary" },
         };
 
-        public static class Names
+        /// <summary>
+        /// Наименования команд.
+        /// </summary>
+        public static class CommandsNames
         {
             public const string Name = "Name";
             public const string CharsToSound = "CharsToSound";
