@@ -1,11 +1,11 @@
 -name,en,//lang name,//used regex
 
--charsToSound
+-lettersToSound
 //glas
 (?i)u(?=(?&sogl)),(?i)o(?=(?i)([mnv]|th)),>,ʌ,
 (?i)a(?=(?&sogl)),>,æ
 
--soundToSound
+-soundMerge
 
 -variable
 (?'sogl'(?i)[bcdfghjklmnpqrstvwxyz])
