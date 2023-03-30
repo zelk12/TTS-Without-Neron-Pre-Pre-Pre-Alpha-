@@ -44,7 +44,7 @@ namespace TTSWithoutNeron
             fullPhoneticDictionaryData_temp = Regex.Replace(fullPhoneticDictionaryData_temp, "//.*?(,|$|\n|\n\r|\r\n)", "");
             fullPhoneticDictionaryData_temp = Regex.Replace(fullPhoneticDictionaryData_temp, "^(\n|\r\n|\n\r)(|,)", "", RegexOptions.Multiline);
 
-            var test = Regex.Split(fullPhoneticDictionaryData_temp, "-");
+            var test = Regex.(fullPhoneticDictionaryData_temp, "-");
         }
     }
 }
