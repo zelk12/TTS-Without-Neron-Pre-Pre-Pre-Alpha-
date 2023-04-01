@@ -15,7 +15,7 @@ namespace TTSWithoutNeron
 
             transcriptor.PathToPhoneticDictionaryFile = "D:\\PET\\TextToSpeach\\TTSWithoutNeron\\lang\\en.csv";
 
-            transcriptor.ForcedExtract();
+            transcriptor.ForcedDictyonaryCreate();
         }
     }
 }

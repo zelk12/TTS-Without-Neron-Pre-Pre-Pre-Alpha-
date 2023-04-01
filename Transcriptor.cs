@@ -13,16 +13,22 @@ namespace TTSWithoutNeron
         /// </summary>
         private byte state = 0;
 
+        /// <summary>
+        /// Фонетический словарь используемый транскриптором.
+        /// </summary>
         private phoneticDictionary phoneticDictionary = new phoneticDictionary();
 
+        /// <summary>
+        /// Путь до локального места хранения словаря.
+        /// </summary>
         public string PathToPhoneticDictionaryFile;
 
         /// <summary>
-        /// Производит принудительное извлечение фонетического словаря.
+        /// Производит принудительное создание словаря.
         /// </summary>
-        public void ForcedExtract()
+        public void ForcedDictyonaryCreate()
         {
-            phoneticDictionary.Extract(PathToPhoneticDictionaryFile);
+            phoneticDictionary.PreparationVariable(PathToPhoneticDictionaryFile);
         }
     }
 }

@@ -1,17 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TTSWithoutNeron.Transcriptor">
+    <Position X="4.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAAAAAAAAAAAAAQAAAEAAAAAAAIAAA=</HashCode>
+      <FileName>Transcriptor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="TTSWithoutNeron.phoneticDictionary">
     <Position X="2.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgAAgAAAAAAAQQAAAAAAAAAAAAAiAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>QQAAEAAACAAAQQgAAAAAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
       <FileName>phoneticDictionary.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="TTSWithoutNeron.Transcriptor">
-    <Position X="6" Y="2.5" Width="1.5" />
+  <Class Name="TTSWithoutNeron.Constant">
+    <Position X="0.75" Y="2.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="TTSWithoutNeron.Constant.PhoneticDictionaryCommands">
+        <TypeIdentifier>
+          <NewMemberFileName>Constant.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAIAAA=</HashCode>
-      <FileName>Transcriptor.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Constant.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TTSWithoutNeron.Program">
+    <Position X="6.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
