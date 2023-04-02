@@ -22,7 +22,7 @@ namespace TTSWithoutNeron
         /// <summary>
         /// Набор инструкций для перевода букв и их сочетаний в звуки.
         /// </summary>
-        public int LettersTranscriptionInstruction;
+        public List<List<string>> LettersTranscriptionInstruction = new List<List<string>>();
 
         /// <summary>
         /// Набор инструкций для слияния звуков воедино.
@@ -73,14 +73,50 @@ namespace TTSWithoutNeron
         {
             for (int i = 0; i < dictionaryData.Count; i++)
             {
-                Match confirmedCommand = Regex.Match(dictionaryData[i].Value, "-.+");
+                Match confirmedCommand = Regex.Match(dictionaryData[i].Value, "-[A-z]+");
 
                 switch (confirmedCommand.Value)
                 {
                     case Constant.PhoneticDictionaryCommands.Name:
+                        string[] textColumns = dictionaryData[i].Value.Split(',');
+                        string name = textColumns[1];
+                        LanguageName = name;
+
+                        textColumns = null;
+                        name = null;
                         break;
 
                     case Constant.PhoneticDictionaryCommands.LettersTranscriptionInstruction:
+                        string[] textLines = dictionaryData[i].Value.Split('\n');
+                        for (int textLineNumber = 1; textLineNumber < textLines.Length; textLineNumber++)
+                        {
+                            string textLine = textLines[textLineNumber];
+                            textLine = Regex.Replace(textLine, "\r|,\r", "");
+
+                            List<string> lettersBatch = new List<string>();
+                            string sound = "N/A";
+
+                            textColumns = textLine.Split(',');
+
+                            bool thisLettersIs = true;
+                            for (int textColumnNumber = 0; textColumnNumber < textColumns.Length; textColumnNumber++)
+                            {
+                                string textColumn = textColumns[textColumnNumber];
+
+                                if (textColumn != ">" & thisLettersIs)
+                                {
+                                    lettersBatch.Add(textColumn);
+                                }
+                                else if (textColumn != ">")
+                                {
+                                    sound = textColumn;
+                                }
+                                else
+                                {
+                                    thisLettersIs = false;
+                                }
+                            }
+                        }
                         break;
 
                     case Constant.PhoneticDictionaryCommands.WordTranscriptionInstruction:
