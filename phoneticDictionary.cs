@@ -38,7 +38,7 @@ namespace TTSWithoutNeron
         /// Хранит переменные..
         /// Формат (название, модификаторы, значение)
         /// </summary>
-        public List<List<List<string>>> VariableDictionary = new List<List<List<string>>>();
+        public List<List<string>> VariableDictionary = new List<List<string>>();
 
         /// <summary>
         /// Загружает словарь в программу и извлекает из словаря данные.
