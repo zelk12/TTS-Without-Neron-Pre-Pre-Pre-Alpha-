@@ -22,12 +22,12 @@ namespace TTSWithoutNeron
         /// <summary>
         /// Набор инструкций для перевода букв и их сочетаний в звуки.
         /// </summary>
-        public List<List<string>> LettersTranscriptionInstruction = new List<List<string>>();
+        public LettersTranscriptionInstructionClass LettersTranscriptionInstruction = new LettersTranscriptionInstructionClass();
 
         /// <summary>
         /// Набор инструкций для слияния звуков воедино.
         /// </summary>
-        public string SoundMergeInstruction;
+        public SoundMergeInstructionClass SoundMergeInstruction = new SoundMergeInstructionClass();
 
         /// <summary>
         /// Набор слов и их транскрипций.
@@ -38,7 +38,7 @@ namespace TTSWithoutNeron
         /// Хранит переменные..
         /// Формат (название, модификаторы, значение)
         /// </summary>
-        public List<List<string>> VariableDictionary = new List<List<string>>();
+        public VariableDictionaryClass Variables = new VariableDictionaryClass();
 
         /// <summary>
         /// Загружает словарь в программу и извлекает из словаря данные.
@@ -116,7 +116,12 @@ namespace TTSWithoutNeron
                                     thisLettersIs = false;
                                 }
                             }
+
+                            LettersTranscriptionInstruction.Add(sound, lettersBatch);
                         }
+                        break;
+
+                    case Constant.PhoneticDictionaryCommands.SoundMergeInstruction:
                         break;
 
                     case Constant.PhoneticDictionaryCommands.WordTranscriptionInstruction:

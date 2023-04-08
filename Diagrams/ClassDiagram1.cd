@@ -10,12 +10,12 @@
   <Class Name="TTSWithoutNeron.phoneticDictionary">
     <Position X="2.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QQAAEAAACAAAQQgAAAAAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>QQAAEAAAAAAAQQgAAAAAAAAAAAAgAAAAAAQAAAAAAAA=</HashCode>
       <FileName>phoneticDictionary.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TTSWithoutNeron.Constant">
-    <Position X="0.75" Y="2.5" Width="1.5" />
+    <Position X="0.5" Y="2.5" Width="2" />
     <Compartments>
       <Compartment Name="Nested Types" Collapsed="false" />
     </Compartments>
@@ -38,11 +38,11 @@
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="TTSWithoutNeron.VariableDictionary">
+  <Class Name="TTSWithoutNeron.VariableDictionaryClass">
     <Position X="8" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>VariableDictionary.cs</FileName>
+      <HashCode>AAIAAAAAAAAAAAAAAAAABAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TTSClasses.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
