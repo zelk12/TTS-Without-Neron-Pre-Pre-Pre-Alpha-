@@ -60,6 +60,21 @@ namespace TTSWithoutNeron
         }
     }
 
+    internal class WordTranscriptionInstructionClass
+    {
+        public Dictionary<string, string> dictionary { get; private set; } = new Dictionary<string, string>();
+
+        public void Add(string word, string transcription)
+        {
+            dictionary.Add(word, transcription);
+        }
+
+        public void Remove(string word)
+        {
+            dictionary.Remove(word);
+        }
+    }
+
     /// <summary>
     /// Список который хранит переменные.
     /// Формат (название, модификаторы, значение).

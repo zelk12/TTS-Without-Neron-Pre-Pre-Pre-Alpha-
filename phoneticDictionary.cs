@@ -17,7 +17,7 @@ namespace TTSWithoutNeron
         /// <summary>
         /// Имя языка для которого создан словарь
         /// </summary>
-        public string LanguageName;
+        public string LanguageName = "N/A";
 
         /// <summary>
         /// Набор инструкций для перевода букв и их сочетаний в звуки.
@@ -32,7 +32,7 @@ namespace TTSWithoutNeron
         /// <summary>
         /// Набор слов и их транскрипций.
         /// </summary>
-        public string WordTranscriptionInstruction;
+        public WordTranscriptionInstructionClass WordTranscriptionInstruction = new WordTranscriptionInstructionClass();
 
         /// <summary>
         /// Хранит переменные..
@@ -78,16 +78,26 @@ namespace TTSWithoutNeron
                 switch (confirmedCommand.Value)
                 {
                     case Constant.PhoneticDictionaryCommands.Name:
+
+                        #region Name
+
                         string[] textColumns = dictionaryData[i].Value.Split(',');
                         string name = textColumns[1];
                         LanguageName = name;
 
                         textColumns = null;
                         name = null;
+
+                        #endregion Name
+
                         break;
 
                     case Constant.PhoneticDictionaryCommands.LettersTranscriptionInstruction:
+
+                        #region LetterToSound
+
                         string[] textLines = dictionaryData[i].Value.Split('\n');
+
                         for (int textLineNumber = 1; textLineNumber < textLines.Length; textLineNumber++)
                         {
                             string textLine = textLines[textLineNumber];
@@ -119,15 +129,126 @@ namespace TTSWithoutNeron
 
                             LettersTranscriptionInstruction.Add(sound, lettersBatch);
                         }
+
+                        textColumns = null;
+                        textLines = null;
+
+                        #endregion LetterToSound
+
                         break;
 
                     case Constant.PhoneticDictionaryCommands.SoundMergeInstruction:
+
+                        #region SoundMerger
+
+                        textLines = dictionaryData[i].Value.Split('\n');
+
+                        for (int textLineNumber = 1; textLineNumber < textLines.Length; textLineNumber++)
+                        {
+                            string textLine = textLines[textLineNumber];
+                            textLine = Regex.Replace(textLine, "\r|,\r", "");
+
+                            List<string> mergedSoundBatch = new List<string>();
+                            string sound = "N/A";
+
+                            textColumns = textLine.Split(',');
+
+                            bool thisMergedSounds = true;
+                            for (int textColumnNumber = 0; textColumnNumber < textColumns.Length; textColumnNumber++)
+                            {
+                                string textColumn = textColumns[textColumnNumber];
+
+                                if (textColumn != ">" & thisMergedSounds)
+                                {
+                                    mergedSoundBatch.Add(textColumn);
+                                }
+                                else if (textColumn != ">")
+                                {
+                                    sound = textColumn;
+                                }
+                                else
+                                {
+                                    thisMergedSounds = false;
+                                }
+                            }
+
+                            SoundMergeInstruction.Add(sound, mergedSoundBatch);
+                            textLines = null;
+                        }
+
+                        textColumns = null;
+                        textLines = null;
+
+                        #endregion SoundMerger
+
                         break;
 
                     case Constant.PhoneticDictionaryCommands.WordTranscriptionInstruction:
+
+                        #region WordToTranscript
+
+                        textLines = dictionaryData[i].Value.Split('\n');
+
+                        for (int textLineNumber = 1; textLineNumber < textLines.Length; textLineNumber++)
+                        {
+                            string textLine = textLines[textLineNumber];
+                            textLine = Regex.Replace(textLine, "\r|,\r", "");
+
+                            string word = "N/A";
+                            string transcription = "N/A";
+
+                            textColumns = textLine.Split(',');
+
+                            bool thisWord = true;
+                            for (int textColumnNumber = 0; textColumnNumber < textColumns.Length; textColumnNumber++)
+                            {
+                                string textColumn = textColumns[textColumnNumber];
+
+                                if (textColumn != ">" & thisWord)
+                                {
+                                    word = textColumn;
+                                }
+                                else if (textColumn != ">")
+                                {
+                                    transcription = textColumn;
+                                }
+                                else
+                                {
+                                    thisWord = false;
+                                }
+                            }
+
+                            WordTranscriptionInstruction.Add(word, transcription);
+                        }
+
+                        textColumns = null;
+                        textLines = null;
+
+                        #endregion WordToTranscript
+
                         break;
 
                     case Constant.PhoneticDictionaryCommands.VariableDictionary:
+                        textLines = dictionaryData[i].Value.Split('\n');
+
+                        for (int textLineNumber = 1; textLineNumber < textLines.Length; textLineNumber++)
+                        {
+                            string textLine = textLines[textLineNumber];
+                            textLine = Regex.Replace(textLine, "\r|,\r", "");
+
+                            string vriableName = "N/A";
+                            string modificators = "N/A";
+                            string value = "N/A";
+
+                            vriableName = Regex.Match(textLine, @"(?<=\\?').+(')").Value;
+                            modificators = Regex.Match(textLine, "(?<=\\'\\(\\?).+(?=\\).+)").Value;
+                            value = Regex.Match(textLine, "(?<=\\)).+(?=\\))").Value;
+
+                            Variables.Add(vriableName, modificators, value);
+                        }
+
+                        textColumns = null;
+                        textLines = null;
                         break;
 
                     default:

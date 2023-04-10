@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TTSWithoutNeron
 {
-    internal class Transcriptor
+    public class Transcriptor
     {
         /// <summary>
         /// Этап который выполняет транскриптор:
