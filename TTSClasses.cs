@@ -11,25 +11,25 @@ namespace TTSWithoutNeron
     /// </summary>
     internal class LettersTranscriptionInstructionClass
     {
-        public Dictionary<string, List<string>> dictionary { get; private set; } = new Dictionary<string, List<string>>();
+        public Dictionary<string, string[]> V_Dictionary { get; private set; } = new Dictionary<string, string[]>();
 
         /// <summary>
         /// Добавляет инструкцию в список.
         /// </summary>
         /// <param name="sound">Звук получаемый при сочетании.</param>
         /// <param name="letters">Буквы и их сочетания.</param>
-        public void Add(string sound, List<string> letters)
+        public void Add(string sound, string[] letters)
         {
-            dictionary.Add(sound, letters);
+            V_Dictionary.Add(sound, letters);
         }
 
         /// <summary>
         /// Убирает инструкцию из списка.
         /// </summary>
         /// <param name="sound">Звук</param>
-        private void Remove(string sound)
+        public void Remove(string sound)
         {
-            dictionary.Remove(sound);
+            V_Dictionary.Remove(sound);
         }
     }
 
@@ -38,40 +38,43 @@ namespace TTSWithoutNeron
     /// </summary>
     internal class SoundMergeInstructionClass
     {
-        public Dictionary<string, List<string>> dictionary { get; private set; } = new Dictionary<string, List<string>>();
+        public Dictionary<string, string[]> V_Dictionary { get; private set; } = new Dictionary<string, string[]>();
 
         /// <summary>
         /// Добавляет инструкцию в список.
         /// </summary>
         /// <param name="sound">Звук.</param>
         /// <param name="sounds">Сочетание звуков.</param>
-        public void Add(string sound, List<string> sounds)
+        public void Add(string sound, string[] sounds)
         {
-            dictionary.Add(sound, sounds);
+            V_Dictionary.Add(sound, sounds);
         }
 
         /// <summary>
         /// Убирает инструкцию из списка.
         /// </summary>
         /// <param name="sound">Звук</param>
-        private void Remove(string sound)
+        public void Remove(string sound)
         {
-            dictionary.Remove(sound);
+            V_Dictionary.Remove(sound);
         }
     }
 
+    /// <summary>
+    /// Хранит слова и их транскрипции
+    /// </summary>
     internal class WordTranscriptionInstructionClass
     {
-        public Dictionary<string, string> dictionary { get; private set; } = new Dictionary<string, string>();
+        public Dictionary<string, string> V_Dictionary { get; private set; } = new Dictionary<string, string>();
 
         public void Add(string word, string transcription)
         {
-            dictionary.Add(word, transcription);
+            V_Dictionary.Add(word, transcription);
         }
 
         public void Remove(string word)
         {
-            dictionary.Remove(word);
+            V_Dictionary.Remove(word);
         }
     }
 
@@ -81,7 +84,7 @@ namespace TTSWithoutNeron
     /// </summary>
     internal class VariableDictionaryClass
     {
-        public Dictionary<string, string[]> dictionary { get; private set; } = new Dictionary<string, string[]>();
+        public Dictionary<string, string[]> V_Dictionary { get; private set; } = new Dictionary<string, string[]>();
 
         /// <summary>
         /// Добавляет переменную в список переменных.
@@ -91,7 +94,7 @@ namespace TTSWithoutNeron
         /// <param name="value">Значение переменной.</param>
         public void Add(string name, string mod, string value)
         {
-            dictionary.Add(name, new string[] { mod, value });
+            V_Dictionary.Add(name, new string[] { mod, value });
         }
 
         /// <summary>
@@ -100,7 +103,7 @@ namespace TTSWithoutNeron
         /// <param name="name">Имя переменной.</param>
         public void Remove(string name)
         {
-            dictionary.Remove(name);
+            V_Dictionary.Remove(name);
         }
     }
 }

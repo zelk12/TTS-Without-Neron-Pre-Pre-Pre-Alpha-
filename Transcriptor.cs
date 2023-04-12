@@ -16,7 +16,7 @@ namespace TTSWithoutNeron
         /// <summary>
         /// Фонетический словарь используемый транскриптором.
         /// </summary>
-        private phoneticDictionary phoneticDictionary = new phoneticDictionary();
+        private PhoneticDictionary phoneticDictionary = new PhoneticDictionary();
 
         /// <summary>
         /// Путь до локального места хранения словаря.

@@ -7,11 +7,12 @@
       <FileName>Transcriptor.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="TTSWithoutNeron.phoneticDictionary">
+  <Class Name="TTSWithoutNeron.PhoneticDictionary">
     <Position X="2.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QQAAEAAAAAAAQQgAAAAAAAAAAAAgAAAAAAQAAAAAAAA=</HashCode>
-      <FileName>phoneticDictionary.cs</FileName>
+      <HashCode>QQAAEAAAAEAEQwgAAAAAAAAAABAgAAAAEAQAAAAAAAA=</HashCode>
+      <FileName>PhoneticDictionary.cs</FileName>
+      <NewMemberFileName>phoneticDictionary.cs</NewMemberFileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TTSWithoutNeron.Constant">
@@ -41,7 +42,28 @@
   <Class Name="TTSWithoutNeron.VariableDictionaryClass">
     <Position X="8" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAIAAAAAAAAAAAAAAAAABAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAIAAAAAAAAAAAAAAAAABAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>TTSClasses.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TTSWithoutNeron.SoundMergeInstructionClass" Collapsed="true">
+    <Position X="13.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAABAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>TTSClasses.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TTSWithoutNeron.WordTranscriptionInstructionClass" Collapsed="true">
+    <Position X="9.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAABAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>TTSClasses.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TTSWithoutNeron.LettersTranscriptionInstructionClass" Collapsed="true">
+    <Position X="11.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAABAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
       <FileName>TTSClasses.cs</FileName>
     </TypeIdentifier>
   </Class>
