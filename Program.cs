@@ -15,7 +15,8 @@ namespace TTSWithoutNeron
 
             transcriptor.PathToPhoneticDictionaryFile = "D:\\PET\\TextToSpeach\\TTSWithoutNeron\\lang\\en.csv";
 
-            transcriptor.ForcedDictyonaryCreate();
+            transcriptor.DictionaryCreate();
+            string result = transcriptor.Transcript("but Hello ann love, world! Ann Annnnn Helloo world");
         }
     }
 }
