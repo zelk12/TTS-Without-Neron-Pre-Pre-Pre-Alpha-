@@ -1,249 +1,159 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Diagnostics;
-using System.IO;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.InteropServices;
+using System.Linq.Expressions;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace TTSWithoutNeron
 {
-    /// <summary>
-    /// Класс транскриптора.
-    /// </summary>
-    internal partial class Transcriptor
+    public class Transcriptor
     {
         /// <summary>
-        /// Словарь транскриптора.
-        /// Содержит имя языка и инструкции о создании транскрипций.
+        /// Этап который выполняет транскриптор:
+        /// 0 - загрузка данных и формирование словаря, 1 - транскрипция заданного текста.
         /// </summary>
-        public partial class LanguageDictionary
+        private byte state = 0;
+
+        /// <summary>
+        /// Фонетический словарь используемый транскриптором.
+        /// </summary>
+        private PhoneticDictionary phoneticDictionary = new PhoneticDictionary();
+
+        /// <summary>
+        /// Путь до локального места хранения словаря.
+        /// </summary>
+        public string PathToPhoneticDictionaryFile;
+
+        /// <summary>
+        /// Производит принудительное создание словаря с удалением предыдущего словаря.
+        /// </summary>
+        public void DictionaryCreate()
         {
-            /// <summary>
-            /// Название языка.
-            /// </summary>
-            public StandartClass.LanguageName Name { get; private set; } = new StandartClass.LanguageName();
-
-            private StandartClass.Dictionarys dictionary = new StandartClass.Dictionarys();
-
-            /// <summary>
-            /// Метод первоначального запуска языка,
-            /// -Загружает файл языка
-            /// -Создает массив с делением этого файла по строкам
-            /// -Создает словари языка, которые используются при работе
-            /// </summary>
-            /// <param name="_path">Путь к директории где храниться файл языка.</param>
-            public void Load(string _path = "")
+            if (phoneticDictionary != null)
             {
-                StreamReader langFile = new StreamReader(_path);
+                phoneticDictionary = null;
+            }
+            phoneticDictionary = new PhoneticDictionary();
+            phoneticDictionary.PreparationVariable(PathToPhoneticDictionaryFile);
+        }
 
-                string langText = langFile.ReadToEnd();
-                string[] langTextLines = textToTextLines(langText);
+        /// <summary>
+        /// Транскрибирует входной текст.
+        /// </summary>
+        /// <param name="inputText">Входной текст.</param>
+        /// <returns></returns>
+        public string Transcript(string inputText)
+        {
+            string result = WordTranscript(inputText);
+            result = LetterTranscript(result);
 
-                Name.Find(langTextLines);
-                dictionary.Create(langTextLines);
+            return result;
+        }
+
+        /// <summary>
+        /// Транскрибирует на основе библиотеки слов.
+        /// </summary>
+        /// <param name="inputText">Входной текст.</param>
+        /// <returns></returns>
+        private string WordTranscript(string inputText)
+        {
+            string result = inputText;
+
+            WordTranscriptionInstructionClass wordsInstruction = phoneticDictionary.WordTranscriptionInstruction;
+            Dictionary<string, string>.KeyCollection words = wordsInstruction.V_Dictionary.Keys;
+
+            foreach (var word in words)
+            {
+                string transript = phoneticDictionary.WordTranscriptionInstruction.V_Dictionary[word];
+                @result = Regex.Replace(@result, $@"{word}\b", transript, RegexOptions.IgnoreCase);
             }
 
-            /// <summary>
-            /// Из единого текстового файла с переносами,
-            /// создает массив с делением на отдельные строк.
-            /// </summary>
-            /// <param name="_input">Текстовый файл где есть переносы по строкам.</param>
-            /// <returns>Массив строк из файла.</returns>
-            private static string[] textToTextLines(string _input)
+            return result;
+        }
+
+        /// <summary>
+        /// Транскрибирует символы и их сочетания.
+        /// </summary>
+        /// <param name="inputText">Входящий текст</param>
+        /// <returns></returns>
+        private string LetterTranscript(string inputText)
+        {
+            string result = inputText;
+
+            LettersTranscriptionInstructionClass lettersInstruction = phoneticDictionary.LettersTranscriptionInstruction;
+            Dictionary<string, string[]>.KeyCollection sounds = lettersInstruction.V_Dictionary.Keys;
+
+            VariableDictionaryClass lettersVariable = phoneticDictionary.Variables;
+            Dictionary<string, string[]>.KeyCollection variablesName = phoneticDictionary.Variables.V_Dictionary.Keys;
+
+            foreach (var sound in sounds)
             {
-                string pattern = @"(\r\n)+";
-                string substitution = "\n";
+                string[] instructions = phoneticDictionary.LettersTranscriptionInstruction.V_Dictionary[sound];
 
-                Regex regex = new Regex(pattern);
-                string result = regex.Replace(_input, substitution);
-
-                pattern = @"(,|\n)//.*?(?=(\n|,))";
-                substitution = "";
-                _input = result;
-
-                regex = new Regex(pattern);
-                result = regex.Replace(_input, substitution);
-
-                string[] _langTextSplited = result.Split(new char[] { '\n' });
-
-                return _langTextSplited;
-            }
-
-            public class StandartClass
-            {
-                /// <summary>
-                /// Класс обозначающий имя файла
-                /// </summary>
-                public class LanguageName
+                for (int i = 0; i < instructions.Length; i++)
                 {
-                    private static string value = null;
-
-                    public string get()
+                    string instuction = instructions[i];
+                    foreach (string variableName in variablesName)
                     {
-                        return value != null ? value : null;
-                    }
+                        string[] variableParametrsAndValue = lettersVariable.V_Dictionary[variableName];
 
-                    public void set(string _value)
-                    {
-                        value = _value;
-                    }
+                        RegexOptions options = SetRegexOptions(variableParametrsAndValue[0]);
 
-                    /// <summary>
-                    /// Ищет в массиве строк имя языка.
-                    /// </summary>
-                    /// <param name="_langTextLines">Массив строк языкового файла.</param>
-                    public void Find(string[] _langTextLines)
-                    {
-                        foreach (string line in _langTextLines)
-                        {
-                            bool nameFinded = false;
+                        instuction = Regex.Replace(@instuction, $@"\(\?\&{variableName}\)", variableParametrsAndValue[1]);
 
-                            string[] splitedLine = line.Split(',');
-
-                            IEnumerator lines = splitedLine.GetEnumerator();
-                            while (lines.MoveNext() && lines.Current != null)
-                            {
-                                string lineText = lines.Current.ToString().Trim();
-
-                                if (lineText == Constants.Commands[Constants.CommandsNames.Name] && lines.MoveNext())
-                                {
-                                    value = lines.Current.ToString().Trim();
-                                    nameFinded = true;
-                                    break;
-                                }
-                            }
-
-                            if (nameFinded)
-                            {
-                                break;
-                            }
-                        }
-                    }
-                }
-
-                /// <summary>
-                /// Словари используемые для основной работы TTS.
-                /// </summary>
-                public class Dictionarys
-                {
-                    private Dictionary<string, string> charsAndSound = new Dictionary<string, string>();
-                    private Dictionary<string, string> soundAndSound = new Dictionary<string, string>();
-
-                    private Dictionary<string[], string> variable = new Dictionary<string[], string>();
-                    private Dictionary<string, string> wordAndTranscription = new Dictionary<string, string>();
-
-                    /// <summary>
-                    /// Создает и заполняет словари.
-                    /// </summary>
-                    /// <param name="_langTextLines">Массив строк языкового файла.</param>
-                    public void Create(string[] _langTextLines)
-                    {
-                        int state = -1;
-                        Dictionary<string, int> switchStates = new Dictionary<string, int>{
-                            { Constants.Commands[Constants.CommandsNames.CharsToSound], 0},
-                            { Constants.Commands[Constants.CommandsNames.SoundToSound], 1},
-                            { Constants.Commands[Constants.CommandsNames.Variable], 2},
-                            { Constants.Commands[Constants.CommandsNames.Glossary], 3},
-                        };
-
-                        for (int _lineNumber = 0; _lineNumber < _langTextLines.Length; _lineNumber++)
-                        {
-                            string _line = _langTextLines[_lineNumber];
-                            if (_line.Contains('-'))
-                            {
-                                if (!switchStates.TryGetValue(_line, out state))
-                                {
-                                    state = -1;
-                                }
-                            }
-                            else
-                            {
-                                switch (state)
-                                {
-                                    /// <summary>
-                                    /// Заполняет словарь сочетанием символов и создаваемыми ими звуками.
-                                    /// </summary>
-                                    case 0:
-                                        RegexOptions options = RegexOptions.IgnoreCase;
-
-                                        string tempLine = Regex.Replace(@_line, @"(,(?=>)|(?<=>),|,$)", "", options);
-                                        string[] tempGlossary = tempLine.Split('>');
-                                        string tempNewCharData = tempGlossary[0].Replace(',', '|');
-
-                                        charsAndSound.Add(tempNewCharData, tempGlossary[1]);
-
-                                        tempLine = null;
-                                        tempGlossary = null;
-                                        tempNewCharData = null;
-                                        break;
-
-                                    /// <summary>
-                                    /// Заполняет словарь сочетанием звуков и создаваемыми ими в сумме звуками.
-                                    /// </summary>
-                                    case 1:
-                                        tempLine = Regex.Replace(@_line, @"(,(?=>)|(?<=>),|,$)", "");
-                                        tempGlossary = tempLine.Split('>');
-                                        string tempNewSoundData = tempGlossary[0].Replace(',', '|');
-
-                                        soundAndSound.Add(tempNewSoundData, tempGlossary[1]);
-
-                                        tempLine = null;
-                                        tempGlossary = null;
-                                        tempNewCharData = null;
-                                        break;
-
-                                    /// <summary>
-                                    /// Заполняет словарь существующими переменными и их значениями.
-                                    /// </summary>
-                                    case 2:
-                                        options = RegexOptions.IgnoreCase;
-
-                                        string tempName = Regex.Match(@_line, "(?<=\\?').*(?=')", options).Value;
-                                        string tempParametrs = Regex.Match(@_line, "(?<=\\(\\?)[gimsnxrN]*(?=\\))").Value;
-                                        string tempData = Regex.Match(@_line, "(?<=\\)).*(?=\\))", options).Value;
-
-                                        variable.Add(new string[] { tempName, tempParametrs }, tempData);
-                                        break;
-
-                                    /// <summary>
-                                    /// Заполняет словарь словами и их транскрипциями.
-                                    /// </summary>
-                                    case 3:
-                                        options = RegexOptions.IgnoreCase;
-
-                                        string tempText = Regex.Replace(@_line, @"(,(?=>)|(?<=>),|,$)", "", options);
-                                        tempGlossary = tempText.Split('>');
-
-                                        wordAndTranscription.Add(tempGlossary[0], tempGlossary[1]);
-                                        break;
-
-                                    /// <summary>
-                                    /// Пишет что данный вид состояния не найден.
-                                    /// </summary>
-                                    default:
-                                        Debug.WriteLine("State " + state.ToString() + " not found.");
-                                        break;
-                                }
-                            }
-                        }
+                        result = Regex.Replace(inputText, instuction, sound, options);
                     }
                 }
             }
 
-            /// <summary>
-            /// Создает транскрипцию текста.
-            /// </summary>
-            /// <param name="Text">Текст, транскрипцию которого нужно создать.</param>
-            /// <returns></returns>
-            public string Transcript(string Text)
+            return result;
+        }
+
+        /// <summary>
+        /// Переводит символьное отображение параметров в RegexOptions
+        /// </summary>
+        /// <param name="paramerts">Символьное представление параметров</param>
+        /// <returns></returns>
+        private RegexOptions SetRegexOptions(string paramerts)
+        {
+            RegexOptions options = new RegexOptions();
+
+            foreach (var paramert in paramerts)
             {
-                return "N/A";
+                switch (paramert)
+                {
+                    case 'i':
+                        options |= RegexOptions.IgnoreCase;
+                        break;
+
+                    case 'm':
+                        options |= RegexOptions.Multiline;
+                        break;
+
+                    case 's':
+                        options |= RegexOptions.Singleline;
+                        break;
+
+                    case 'n':
+                        options |= RegexOptions.ExplicitCapture;
+                        break;
+
+                    case 'x':
+                        options |= RegexOptions.IgnorePatternWhitespace;
+                        break;
+
+                    case 'R':
+                        options |= RegexOptions.RightToLeft;
+                        break;
+
+                    default:
+                        break;
+                }
             }
+
+            return options;
         }
     }
 }

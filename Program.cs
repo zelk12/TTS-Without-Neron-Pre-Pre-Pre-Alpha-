@@ -11,8 +11,12 @@ namespace TTSWithoutNeron
     {
         private static void Main(string[] args)
         {
-            Transcriptor.LanguageDictionary languageTrancriptInstruction = new Transcriptor.LanguageDictionary();
-            languageTrancriptInstruction.Load("D:\\PET\\TextToSpeach\\TTSWithoutNeron\\lang\\en.csv");
+            Transcriptor transcriptor = new Transcriptor();
+
+            transcriptor.PathToPhoneticDictionaryFile = "D:\\PET\\TextToSpeach\\TTSWithoutNeron\\lang\\en.csv";
+
+            transcriptor.DictionaryCreate();
+            string result = transcriptor.Transcript("but Hello ann love, world! Ann Annnnn Helloo world raft");
         }
     }
 }

@@ -1,18 +1,19 @@
 -name,en,//lang name,//used regex
 
--charsToSound
+-lettersToSound
 //glas
 (?i)u(?=(?&sogl)),(?i)o(?=(?i)([mnv]|th)),>,ʌ,
 (?i)a(?=(?&sogl)),>,æ
+(?i)ar,a(f|nt|th),>,a:
 
--soundToSound
-
--variable
-(?'sogl'(?i)[bcdfghjklmnpqrstvwxyz])
-(?'glas'(?i)[aeiouy])
+-soundMerge
 
 -glossary
 but,>,bʌt
 love,>,lʌv
 act,>,ækt
-Ann,>,æn
+ann,>,æn
+
+-variable
+(?'sogl'(?i)[bcdfghjklmnpqrstvwxyz])
+(?'glas'(?i)[aeiouy])
