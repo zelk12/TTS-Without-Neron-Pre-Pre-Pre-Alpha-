@@ -4,6 +4,7 @@
 //glas
 (?i)u(?=(?&sogl)),(?i)o(?=(?i)([mnv]|th)),>,ʌ,
 (?i)a(?=(?&sogl)),>,æ
+(?i)ar,a(f|nt|th),>,a:
 
 -soundMerge
 

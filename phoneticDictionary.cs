@@ -294,7 +294,7 @@ namespace TTSWithoutNeron
                 string modificators = "N/A";
                 string value = "N/A";
 
-                vriableName = Regex.Match(textLine, @"(?<=\\?').+(')").Value;
+                vriableName = Regex.Match(textLine, @"(?<=\\?').+(?=')").Value;
                 modificators = Regex.Match(textLine, "(?<=\\'\\(\\?).+(?=\\).+)").Value;
                 value = Regex.Match(textLine, "(?<=\\)).+(?=\\))").Value;
 
