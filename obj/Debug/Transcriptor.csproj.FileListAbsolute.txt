@@ -1,0 +1,7 @@
+D:\PET\TextToSpeach\TTSWithoutNeron\obj\Debug\Transcriptor.csproj.AssemblyReference.cache
+D:\PET\TextToSpeach\TTSWithoutNeron\obj\Debug\Transcriptor.csproj.SuggestedBindingRedirects.cache
+D:\PET\TextToSpeach\TTSWithoutNeron\obj\Debug\TTSWithoutNeron.User_Interface.UserControl1.resources
+D:\PET\TextToSpeach\TTSWithoutNeron\obj\Debug\Transcriptor.csproj.GenerateResource.cache
+D:\PET\TextToSpeach\TTSWithoutNeron\obj\Debug\Transcriptor.csproj.CoreCompileInputs.cache
+D:\PET\TextToSpeach\TTSWithoutNeron\obj\Debug\TTSWithoutNeron.exe
+D:\PET\TextToSpeach\TTSWithoutNeron\obj\Debug\TTSWithoutNeron.pdb
