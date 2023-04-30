@@ -11,8 +11,24 @@
 -glossary
 but,>,bʌt
 love,>,lʌv
+dull,>,dʌl
+gun,>,gʌn
+summer,>,sʌmə
+come,>,kʌm
+country,>,kʌntri
+us,>,ʌs
+ugly,>,ʌgli
+study,>,stʌdi
 act,>,ækt
 ann,>,æn
+add,>,æd
+Alice,>,ælis
+lamp,>,læmp
+bad,>,bæd
+map,>,mæp
+family,>,fæmili
+plan,>,plæn
+narrow,>,nærou
 
 -variable
 (?'sogl'(?i)[bcdfghjklmnpqrstvwxyz])

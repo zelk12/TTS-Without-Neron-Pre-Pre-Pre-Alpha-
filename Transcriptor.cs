@@ -6,16 +6,10 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace TTSWithoutNeron
+namespace Transcriptor
 {
     public class Transcriptor
     {
-        /// <summary>
-        /// Этап который выполняет транскриптор:
-        /// 0 - загрузка данных и формирование словаря, 1 - транскрипция заданного текста.
-        /// </summary>
-        private byte state = 0;
-
         /// <summary>
         /// Фонетический словарь используемый транскриптором.
         /// </summary>

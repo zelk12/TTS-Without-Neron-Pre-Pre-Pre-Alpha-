@@ -56,9 +56,10 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Diagrams\ClassDiagram1.cd" />
-    <None Include="lang\en.csv" />
+    <None Include="Lang\en.csv" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Audio\" />
     <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

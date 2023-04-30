@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace TTSWithoutNeron
+namespace Transcriptor
 {
     /// <summary>
     /// Класс фонетических словарей, хранит в себе данные словаря.

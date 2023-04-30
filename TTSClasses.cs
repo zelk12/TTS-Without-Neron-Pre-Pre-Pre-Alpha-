@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TTSWithoutNeron
+namespace Transcriptor
 {
     /// <summary>
     /// Хранит инструкции как объединять буквы в звуки.
