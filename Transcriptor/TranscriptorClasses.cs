@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Transcriptor
+namespace TTSWithoutNeron.Transcriptor
 {
     /// <summary>
     /// Хранит инструкции как объединять буквы в звуки.
@@ -80,21 +80,20 @@ namespace Transcriptor
 
     /// <summary>
     /// Список который хранит переменные.
-    /// Формат (название, модификаторы, значение).
+    /// Формат (название, значение).
     /// </summary>
     internal class VariableDictionaryClass
     {
-        public Dictionary<string, string[]> V_Dictionary { get; private set; } = new Dictionary<string, string[]>();
+        public Dictionary<string, string> V_Dictionary { get; private set; } = new Dictionary<string, string>();
 
         /// <summary>
         /// Добавляет переменную в список переменных.
         /// </summary>
         /// <param name="name">Имя переменной.</param>
-        /// <param name="mod">Модификатор ввода.</param>
         /// <param name="value">Значение переменной.</param>
-        public void Add(string name, string mod, string value)
+        public void Add(string name, string value)
         {
-            V_Dictionary.Add(name, new string[] { mod, value });
+            V_Dictionary.Add(name,  value);
         }
 
         /// <summary>

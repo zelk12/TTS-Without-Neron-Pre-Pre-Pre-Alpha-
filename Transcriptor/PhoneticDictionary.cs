@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Transcriptor
+namespace TTSWithoutNeron.Transcriptor
 {
     /// <summary>
     /// Класс фонетических словарей, хранит в себе данные словаря.
@@ -295,10 +295,9 @@ namespace Transcriptor
                 string value = "N/A";
 
                 vriableName = Regex.Match(textLine, @"(?<=\\?').+(?=')").Value;
-                modificators = Regex.Match(textLine, "(?<=\\'\\(\\?).+(?=\\).+)").Value;
-                value = Regex.Match(textLine, "(?<=\\)).+(?=\\))").Value;
+                value = Regex.Match(textLine, "(?<=\\')\\(.+(?=\\))").Value;
 
-                Variables.Add(vriableName, modificators, value);
+                Variables.Add(vriableName, value);
             }
 #if DEBUG
             Debug.WriteLine("Variable searching Done");

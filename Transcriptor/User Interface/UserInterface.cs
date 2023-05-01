@@ -10,16 +10,27 @@ using System.Windows.Forms;
 
 namespace TTSWithoutNeron.Transcriptor.User_Interface
 {
-    public partial class UserInterface : Form
+    public partial class TranscriptorUserInterface : Form
     {
-        public UserInterface()
+        public TranscriptorUserInterface()
         {
             InitializeComponent();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void FileOverviewButton_Click(object sender, EventArgs e)
         {
+            openFileDialogLangPath.ShowDialog();
+        }
 
+        private void OpenFileDialogLangPath_FileOk(object sender, CancelEventArgs e)
+        {
+            textBoxWithFilePath.Text = openFileDialogLangPath.FileName;
+            Transcriptor.Launch(textBoxWithFilePath.Text);
+        }
+
+        private void TranscriptTextButton_Click(object sender, EventArgs e)
+        {
+            richTextBoxTranscriptedText.Text = Transcriptor.TranscriptCreate(richTextBoxOriginalText.Text);
         }
     }
 }

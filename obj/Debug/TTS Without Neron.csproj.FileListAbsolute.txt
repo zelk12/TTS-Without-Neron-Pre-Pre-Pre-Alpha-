@@ -6,5 +6,5 @@ D:\PET\TextToSpeach\TTSWithoutNeron\obj\Debug\TTS Without Neron.csproj.Suggested
 D:\PET\TextToSpeach\TTSWithoutNeron\obj\Debug\TTS Without Neron.csproj.CoreCompileInputs.cache
 D:\PET\TextToSpeach\TTSWithoutNeron\obj\Debug\TTSWithoutNeron.exe
 D:\PET\TextToSpeach\TTSWithoutNeron\obj\Debug\TTSWithoutNeron.pdb
-D:\PET\TextToSpeach\TTSWithoutNeron\obj\Debug\TTSWithoutNeron.Transcriptor.User_Interface.UserInterface.resources
 D:\PET\TextToSpeach\TTSWithoutNeron\obj\Debug\TTS Without Neron.csproj.GenerateResource.cache
+D:\PET\TextToSpeach\TTSWithoutNeron\obj\Debug\TTSWithoutNeron.Transcriptor.User_Interface.TranscriptorUserInterface.resources

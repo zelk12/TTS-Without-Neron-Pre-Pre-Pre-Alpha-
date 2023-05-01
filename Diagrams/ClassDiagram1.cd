@@ -1,27 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Transcriptor.Transcriptor">
-    <Position X="4.5" Y="2.5" Width="1.5" />
+  <Class Name="TTSWithoutNeron.Program">
+    <Position X="0.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQAAQAAAAAAAAAAAAAAABAAAAAAQAAAAAAAAAABIAIA=</HashCode>
-      <FileName>Transcriptor.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Transcriptor.PhoneticDictionary">
-    <Position X="2.75" Y="2.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>QQAAEAAAAEAEQwgAAAAAAAAAABAgAAAAEAQAAAAAAAA=</HashCode>
-      <FileName>PhoneticDictionary.cs</FileName>
-      <NewMemberFileName>phoneticDictionary.cs</NewMemberFileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Transcriptor.Constant">
-    <Position X="0.5" Y="2.5" Width="2" />
+  <Class Name="TTSWithoutNeron.Transcriptor.Constant">
+    <Position X="4.25" Y="0.5" Width="1.5" />
     <Compartments>
       <Compartment Name="Nested Types" Collapsed="false" />
     </Compartments>
     <NestedTypes>
-      <Class Name="Transcriptor.Constant.PhoneticDictionaryCommands">
+      <Class Name="TTSWithoutNeron.Transcriptor.Constant.PhoneticDictionaryCommands" Collapsed="true">
         <TypeIdentifier>
           <NewMemberFileName>Constant.cs</NewMemberFileName>
         </TypeIdentifier>
@@ -29,42 +21,64 @@
     </NestedTypes>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Constant.cs</FileName>
+      <FileName>Transcriptor\Constant.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Transcriptor.Program">
-    <Position X="6.25" Y="2.5" Width="1.5" />
+  <Class Name="TTSWithoutNeron.Transcriptor.PhoneticDictionary">
+    <Position X="7.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAEAAAQAAAAAAAAAAAAAAAAAAAAAAACAAABAAAAAA=</HashCode>
-      <FileName>Program.cs</FileName>
+      <HashCode>QQAAEAAAAEAEQwgAAAAAAAAAABAgAAAAEAQAAAAAAAA=</HashCode>
+      <FileName>Transcriptor\PhoneticDictionary.cs</FileName>
+      <NewMemberFileName>phoneticDictionary.cs</NewMemberFileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Transcriptor.VariableDictionaryClass">
-    <Position X="8" Y="2.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAIAAAAAAAAAAAAAAAAABAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
-      <FileName>TTSClasses.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Transcriptor.SoundMergeInstructionClass" Collapsed="true">
-    <Position X="13.25" Y="2.5" Width="1.5" />
+  <Class Name="TTSWithoutNeron.Transcriptor.LettersTranscriptionInstructionClass">
+    <Position X="6" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAIAAAAAAAAAAAAAAAAABAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
-      <FileName>TTSClasses.cs</FileName>
+      <FileName>Transcriptor\TranscriptorClasses.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Transcriptor.WordTranscriptionInstructionClass" Collapsed="true">
-    <Position X="9.75" Y="2.5" Width="1.5" />
+  <Class Name="TTSWithoutNeron.Transcriptor.SoundMergeInstructionClass">
+    <Position X="0.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAIAAAAAAAAAAAAAAAAABAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
-      <FileName>TTSClasses.cs</FileName>
+      <FileName>Transcriptor\TranscriptorClasses.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Transcriptor.LettersTranscriptionInstructionClass" Collapsed="true">
-    <Position X="11.5" Y="2.5" Width="1.5" />
+  <Class Name="TTSWithoutNeron.Transcriptor.WordTranscriptionInstructionClass">
+    <Position X="11.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAIAAAAAAAAAAAAAAAAABAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
-      <FileName>TTSClasses.cs</FileName>
+      <FileName>Transcriptor\TranscriptorClasses.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TTSWithoutNeron.Transcriptor.VariableDictionaryClass">
+    <Position X="13" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAABAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Transcriptor\TranscriptorClasses.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TTSWithoutNeron.Transcriptor.TranscriptorProgram">
+    <Position X="9.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAUAAAQAAAAAAAAAAABAAAAAAQAAAAAAAAAABIAIA=</HashCode>
+      <FileName>Transcriptor\TranscriptorProgram.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TTSWithoutNeron.Transcriptor.User_Interface.UserInterface">
+    <Position X="2.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAACAAEAAAAACEAAACAQAMAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Transcriptor\User Interface\UserInterface.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TTSWithoutNeron.Transcriptor.Program">
+    <Position X="2.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Transcriptor\Program.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Transcriptor
+namespace TTSWithoutNeron.Transcriptor
 {
     internal class Constant
     {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -6,24 +7,24 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Transcriptor
+namespace TTSWithoutNeron.Transcriptor
 {
-    public class Transcriptor
+    public static class Transcriptor
     {
         /// <summary>
         /// Фонетический словарь используемый транскриптором.
         /// </summary>
-        private PhoneticDictionary phoneticDictionary = new PhoneticDictionary();
+        private static PhoneticDictionary phoneticDictionary = new PhoneticDictionary();
 
         /// <summary>
         /// Путь до локального места хранения словаря.
         /// </summary>
-        public string PathToPhoneticDictionaryFile;
+        private static string PathToPhoneticDictionaryFile;
 
         /// <summary>
         /// Производит принудительное создание словаря с удалением предыдущего словаря.
         /// </summary>
-        public void DictionaryCreate()
+        private static void DictionaryCreate()
         {
             if (phoneticDictionary != null)
             {
@@ -38,7 +39,7 @@ namespace Transcriptor
         /// </summary>
         /// <param name="inputText">Входной текст.</param>
         /// <returns></returns>
-        public string Transcript(string inputText)
+        private static string Transcript(string inputText)
         {
             string result = WordTranscript(inputText);
             result = LetterTranscript(result);
@@ -51,7 +52,7 @@ namespace Transcriptor
         /// </summary>
         /// <param name="inputText">Входной текст.</param>
         /// <returns></returns>
-        private string WordTranscript(string inputText)
+        private static string WordTranscript(string inputText)
         {
             string result = inputText;
 
@@ -72,32 +73,32 @@ namespace Transcriptor
         /// </summary>
         /// <param name="inputText">Входящий текст</param>
         /// <returns></returns>
-        private string LetterTranscript(string inputText)
+        private static string LetterTranscript(string inputText)
         {
             string result = inputText;
 
             LettersTranscriptionInstructionClass lettersInstruction = phoneticDictionary.LettersTranscriptionInstruction;
-            Dictionary<string, string[]>.KeyCollection sounds = lettersInstruction.V_Dictionary.Keys;
 
-            VariableDictionaryClass lettersVariable = phoneticDictionary.Variables;
-            Dictionary<string, string[]>.KeyCollection variablesName = phoneticDictionary.Variables.V_Dictionary.Keys;
+            string[] sounds = lettersInstruction.V_Dictionary.Keys.ToArray();
+            string[][] transcriptInstructions = lettersInstruction.V_Dictionary.Values.ToArray();
 
-            foreach (var sound in sounds)
+            string[] variablesName = phoneticDictionary.Variables.V_Dictionary.Keys.ToArray();
+            string[] variablesValue = phoneticDictionary.Variables.V_Dictionary.Values.ToArray();
+
+            for (int soundNumber = 0; soundNumber < sounds.Length; soundNumber++)
             {
-                string[] instructions = phoneticDictionary.LettersTranscriptionInstruction.V_Dictionary[sound];
-
-                for (int i = 0; i < instructions.Length; i++)
+                for (int instructionNumber = 0; instructionNumber < transcriptInstructions[soundNumber].Length; instructionNumber++)
                 {
-                    string instuction = instructions[i];
-                    foreach (string variableName in variablesName)
+                    for (int variablesNumber = 0; variablesNumber < variablesValue.Length; variablesNumber++)
                     {
-                        string[] variableParametrsAndValue = lettersVariable.V_Dictionary[variableName];
-
-                        RegexOptions options = SetRegexOptions(variableParametrsAndValue[0]);
-
-                        instuction = Regex.Replace(@instuction, $@"\(\?\&{variableName}\)", variableParametrsAndValue[1]);
-
-                        result = Regex.Replace(inputText, instuction, sound, options);
+                        string transcriptInstuction = transcriptInstructions[soundNumber][instructionNumber];
+                        bool variableFinded = Regex.IsMatch(transcriptInstuction, $@"\(\?\&{variablesName[variablesNumber]}\)");
+                        if (variableFinded)
+                        {
+                            transcriptInstuction = Regex.Replace(transcriptInstuction, $@"\(\?\&{variablesName[variablesNumber]}\)", variablesValue[variablesNumber]);
+                            result = Regex.Replace(result, transcriptInstuction, sounds[soundNumber]);
+                        }
+                        
                     }
                 }
             }
@@ -105,49 +106,15 @@ namespace Transcriptor
             return result;
         }
 
-        /// <summary>
-        /// Переводит символьное отображение параметров в RegexOptions
-        /// </summary>
-        /// <param name="paramerts">Символьное представление параметров</param>
-        /// <returns></returns>
-        private RegexOptions SetRegexOptions(string paramerts)
+        public static void Launch(string path)
         {
-            RegexOptions options = new RegexOptions();
+            PathToPhoneticDictionaryFile = path;
+            DictionaryCreate();
+        }
 
-            foreach (var paramert in paramerts)
-            {
-                switch (paramert)
-                {
-                    case 'i':
-                        options |= RegexOptions.IgnoreCase;
-                        break;
-
-                    case 'm':
-                        options |= RegexOptions.Multiline;
-                        break;
-
-                    case 's':
-                        options |= RegexOptions.Singleline;
-                        break;
-
-                    case 'n':
-                        options |= RegexOptions.ExplicitCapture;
-                        break;
-
-                    case 'x':
-                        options |= RegexOptions.IgnorePatternWhitespace;
-                        break;
-
-                    case 'R':
-                        options |= RegexOptions.RightToLeft;
-                        break;
-
-                    default:
-                        break;
-                }
-            }
-
-            return options;
+        public static string TranscriptCreate(string text)
+        {
+            return Transcript(text);
         }
     }
 }
